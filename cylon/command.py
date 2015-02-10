@@ -28,7 +28,7 @@ def run_shell(command, options=""):
 
 def main():
     if len(sys.argv) == 1:
-        print("command not found.")
+        print("invalid command.")
         return
 
     command = sys.argv[1].lower()
