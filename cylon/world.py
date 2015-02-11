@@ -1,5 +1,5 @@
+import glob
 import yaml
-import textwrap
 
 from selenium import webdriver
 
@@ -19,6 +19,8 @@ class world:
             return
 
         cls.driver.implicitly_wait(8)
+        cls.driver.set_page_load_timeout(15)
+
 
     @classmethod
     def close_browser(cls):
@@ -30,8 +32,11 @@ class world:
 
 
     @classmethod
-    def load_elements(cls, filename):
-        cls.refs = yaml.load(open(filename))
+    def load_elements(cls, files):
+        cls.refs = {}
+        for filename in glob.glob(files):
+            doc = yaml.load(open(filename))
+            cls.refs.update(doc)
 
 
     @classmethod
@@ -63,13 +68,13 @@ class world:
 
 
     @classmethod
-    def log_fail(cls, actual, expect, message=""):
-        content = """
-        assertion fail
-        actual: '%s'
-        expect: '%s'
-        error message: %s
-        """ % (actual, expect, message)
+    def log_fail(cls, actual="", expect="", message=""):
+        content = ""
 
-        print(textwrap.dedent(content))
+        if actual or expect:
+            content = "actual: '%s' \nexpect: '%s'" % (actual, expect)
+        if message:
+            content += "\nmessage: %s" % (message)
+
+        print(content)
         raise AssertionError

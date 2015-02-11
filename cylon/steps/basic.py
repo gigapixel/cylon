@@ -27,12 +27,28 @@ def step_impl(context, ref):
     element.click()
 
 
+@step ("I see browser url contains '{expect}'")
+def step_impl(context, expect):
+    actual = world.driver.current_url
+    if expect not in actual:
+        world.log_fail(actual, expect)
+
+
 @step ("I see [{ref}] text contains '{expect}'")
 def step_impl(context, ref, expect):
     element = world.find_element(ref)
     actual = element.text
 
     if expect not in actual:
+        world.log_fail(actual, expect)
+
+
+@step ("I see [{ref}] @{attr} not contains '{expect}'")
+def step_impl(context, ref, attr, expect):
+    element = world.find_element(ref)
+    actual = element.get_attribute(attr)
+
+    if expect in actual:
         world.log_fail(actual, expect)
 
 
@@ -43,3 +59,12 @@ def step_impl(context, ref, attr, expect):
 
     if expect not in actual:
         world.log_fail(actual, expect)
+
+
+@step ("I see [{ref}] @{attr} is empty")
+def step_impl(context, ref, attr):
+    element = world.find_element(ref)
+    actual = element.get_attribute(attr)
+
+    if actual != "":
+        world.log_fail(actual)
