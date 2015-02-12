@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fileTypes</key>
+	<array>
+		<string>feature</string>
+	</array>
+	<key>name</key>
+	<string>Gherkin</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>comment</key>
+			<string>Feature keywords</string>
+			<key>match</key>
+			<string>\s*(Scenario\:|Feature\:|Scenario Outline\:|Background\:|Examples\:)</string>
+			<key>name</key>
+			<string>keyword.gherkin</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Step keywords</string>
+			<key>match</key>
+			<string>^\s+\b(And|Given|Then|When|But)\b</string>
+			<key>name</key>
+			<string>support.class.tag.gherkin</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Tags</string>
+			<key>match</key>
+			<string>\s*(@[A-Za-z0-9_\-]+)</string>
+			<key>name</key>
+			<string>entity.name.function.decorator.gherkin</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Line comment</string>
+			<key>match</key>
+			<string>(\#.*\n?)</string>
+			<key>name</key>
+			<string>comment.line.number-sign.gherkin</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Single quote string</string>
+			<key>match</key>
+			<string>(\'\'?[^']*\')</string>
+			<key>name</key>
+			<string>string.single.qoute.gherkin</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Double quote string</string>
+			<key>match</key>
+			<string>(\"\"?[^"]*\")</string>
+			<key>name</key>
+			<string>string.double.qoute.gherkin</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Selector</string>
+			<key>match</key>
+			<string>(\[\'[^']*\'\])</string>
+			<key>name</key>
+			<string>constant.numeric.gherkin</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Reference</string>
+			<key>match</key>
+			<string>(\[[^]]*\])</string>
+			<key>name</key>
+			<string>constant.numeric.gherkin</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.feature</string>
+	<key>uuid</key>
+	<string>b5850ce5-0a84-4148-8e6a-b894ae3238ec</string>
+</dict>
+</plist>

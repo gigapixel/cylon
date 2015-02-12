@@ -6,6 +6,8 @@ import textwrap
 
 import subprocess
 
+from .sublime import *
+
 
 def run_shell(command, options=""):
     return subprocess.call("%s %s" % (command, options), shell=True)
@@ -72,6 +74,9 @@ def main():
     if command == 'init':
         os.makedirs("repositories")
         os.makedirs("features/steps")
+
+    elif command == 'sublime-setup':
+        sublime.setup()
 
     elif command == 'run':
         if len(sys.argv) == 2:
