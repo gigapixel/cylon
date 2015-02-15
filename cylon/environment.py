@@ -1,3 +1,5 @@
+import time
+
 from .world import *
 from .steps.basic import *
 
@@ -10,3 +12,6 @@ def before_feature(context, feature):
 
 def after_feature(context, feature):
     world.close_browser()
+
+def after_scenario(context, scenario):
+    time.sleep(1)

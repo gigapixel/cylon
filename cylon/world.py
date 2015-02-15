@@ -2,7 +2,9 @@ import glob
 import yaml
 
 from selenium import webdriver
+from selenium.common.exceptions import *
 
+from .log import *
 
 class world:
     driver = None
@@ -43,12 +45,30 @@ class world:
     def find_element(cls, ref):
         selector = cls.get_ref_value(ref)
 
-        if selector.startswith('//'):
-            element = cls.driver.find_element_by_xpath(selector)
-        else:
-            element = cls.driver.find_element_by_css_selector(selector)
+        try:
+            if selector.startswith('//'):
+                element = cls.driver.find_element_by_xpath(selector)
+            else:
+                element = cls.driver.find_element_by_css_selector(selector)
+        except NoSuchElementException:
+            log.fail(message="element not found: %s" % ref)
 
         return element
+
+
+    @classmethod
+    def find_elements(cls, ref):
+        selector = cls.get_ref_value(ref)
+
+        try:
+            if selector.startswith('//'):
+                elements = cls.driver.find_elements_by_xpath(selector)
+            else:
+                elements = cls.driver.find_elements_by_css_selector(selector)
+        except NoSuchElementException:
+            log.fail(message="elements not found: %s" % ref)
+
+        return elements
 
 
     @classmethod
@@ -65,16 +85,3 @@ class world:
                 else:
                     value = refs[node]
         return value
-
-
-    @classmethod
-    def log_fail(cls, actual="", expect="", message=""):
-        content = ""
-
-        if actual or expect:
-            content = "actual: '%s' \nexpect: '%s'" % (actual, expect)
-        if message:
-            content += "\nmessage: %s" % (message)
-
-        print(content)
-        raise AssertionError

@@ -44,6 +44,14 @@
 		</dict>
 		<dict>
 			<key>comment</key>
+			<string>Number</string>
+			<key>match</key>
+			<string>\s([0-9]+)\s</string>
+			<key>name</key>
+			<string>entity.name.function.decorator.gherkin</string>
+		</dict>
+		<dict>
+			<key>comment</key>
 			<string>Single quote string</string>
 			<key>match</key>
 			<string>(\'\'?[^']*\')</string>

@@ -21,11 +21,12 @@ class sublime:
         cls.build_package("Gherkin.sublime-package", source_dir, package_dir)
 
         print("building autocomplete...")
-        stepfiles = [os.path.join(current_dir, 'steps/basic.py')]
-        outfile = os.path.join(current_dir, 'plugins/sublime/autocomplete/cylon.sublime-completions')
-        cls.generate_completion_file(stepfiles, outfile)
+        source_dir = os.path.join(current_dir, "plugins/sublime/autocomplete")
 
-        source_dir = os.path.join(current_dir, "plugins/sublime/cylon-steps")
+        stepfiles = [os.path.join(current_dir, 'steps/basic.py')]
+        outputfile = os.path.join(source_dir, 'cylon.sublime-completions')
+        cls.generate_completion_file(stepfiles, outputfile)
+
         cls.build_package("Cylon.sublime-package", source_dir, package_dir)
 
         print("setup completed.")
